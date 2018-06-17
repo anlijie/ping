@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        body{
+            background-color: #eee;
+        }
+        h2{
+            margin-left: 45%;
+            margin-top: 30px;
+        }
+        .info{
+            width:75%;
+            height: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            overflow-y: scroll;
+            margin-top: 50px;
+            text-align: center;
+        }
+        .form{
+            width: 77%;
+            margin: 0 auto;
+            height: 80px;
+            line-height: 100px;
+            text-align: center;
+        }
+        .form label{
+            font-size: 22px;
+            vertical-align: middle;
+        }
+        .form input[type="text"]{
+            height: 25px;
+            margin-right:1%;
+            width: 170px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn{
+            width: 80px;
+            height: 28px;
+            border-radius: 10px;
+            background-color: #348fe8;
+            color: #fff;
+            font-weight: bold;
+        }
+        .center{
+            text-align:center;
+            margin-top:20px;
+            font-size:16px;
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<h2>Ping程序设计</h2>
+<form class="form" th:action="@{/ping}" method="POST">
+    <label for="ipAddress">ip:</label>
+    <input type="text" name="ipAddress" required="required"  onkeyup="this.value=value.replace(/[^\d|.]/g,'');if(this.value=='')(this.value='');"/>
+
+    <label for="pingTimes">ping的次数:</label>
+    <input type="text" name="pingTimes" required="required" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/>
+
+    <label for="timeOut"> 超时时间:</label>
+    <input type="text" name="timeOut" size="10" required="required" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/>
+
+    <input class="btn" type="submit" value="搜索"  title="搜索"/>
+</form>
+<div th:text="${error}" class="center"></div>
+<div class="info">
+    <ul class="ul1">
+        <li th:each="userinfo:${list}" th:text="${userinfo}"></li>
+    </ul>
+</div>
+</body>
+</html>
